@@ -61,15 +61,6 @@ parse([<<?EXT_X_BYTERANGE, Data/binary>>|Lines],
       parse(Lines, M3U8, State0)
   end;
 
-parse([<<?EXT_X_DISCONTINUITY>>|Lines],
-      #{segments := Segments, keys := Keys} = M3U8,
-      #{header := true,
-        playlist := false,
-        segment := false,
-        playlist_end := false} = State) when length(Segments) > 0 ->
-  parse(Lines, M3U8#{segments => [discontinuity|Segments],
-                     keys => [discontinuity|Keys]}, State);
-
 parse([<<?EXT_X_DISCONTINUITY>>|Lines], M3U8,
       #{header := true,
         playlist := false,
