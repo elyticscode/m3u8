@@ -70,14 +70,13 @@ parse([<<?EXT_X_DISCONTINUITY>>|Lines],
   parse(Lines, M3U8#{segments => [discontinuity|Segments],
                      keys => [discontinuity|Keys]}, State);
 
-parse([<<?EXT_X_DISCONTINUITY>>|Lines],
-      #{segments := Segments, keys := Keys} = M3U8,
+parse([<<?EXT_X_DISCONTINUITY>>|Lines], M3U8,
       #{header := true,
         playlist := false,
         segment := false,
         playlist_end := false} = State) ->
   parse(Lines, M3U8, State);
-  
+
 parse([<<?EXT_X_KEY, Data/binary>>|Lines],
       M3U8,
       #{header := true,
