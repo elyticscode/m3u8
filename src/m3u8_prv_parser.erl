@@ -66,7 +66,7 @@ parse([<<?EXT_X_DISCONTINUITY>>|Lines],
       #{header := true,
         playlist := false,
         segment := false,
-        playlist_end := false} = State) when length(Segments) > 0 ->
+        playlist_end := false} = State) ->
   parse(Lines, M3U8#{segments => [discontinuity|Segments],
                      keys => [discontinuity|Keys]}, State);
 
